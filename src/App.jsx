@@ -1,7 +1,20 @@
 import { Button, Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import { UserIcon } from "./assets/userIcon";
+import { div } from "framer-motion/client";
+import { ProductIcon } from "./assets/productIcon";
+import { SalesIcon } from "./assets/saleIcon";
+import TableComponent from "./components/table";
+import { useEffect, useState } from "react";
+import TableProcts from "./components/tableProducts";
+import TableSales from "./components/tableSales";
+
+
+
+
 
 export default function App() {
+ 
+
   return (
     <div className="flex w-full h-screen flex-col items-center">
       <Tabs color="primary" aria-label="Options">
@@ -11,23 +24,34 @@ export default function App() {
             <span>User</span>
           </div>
         }>
-          <Card>
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <Card className="min-w-full">
+            <CardBody className="w-full">
+              <TableComponent/>
+             
             </CardBody>
           </Card>
         </Tab>
-        <Tab key="music" title="Music">
+        <Tab key="music" title={
+          <div className="flex items-center grap-2">
+            <ProductIcon className="max-w-4"/>
+            <span>Product</span>
+          </div>
+        }>
           <Card>
             <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              <TableProcts/>
             </CardBody>
           </Card>
         </Tab>
-        <Tab key="videos" title="Videos">
+        <Tab key="videos" title={
+          <div className="flex items-center grap-2">
+            <SalesIcon  className="max-w-4"/>
+            <span>Sales</span>
+          </div>
+        }>
           <Card>
             <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <TableSales/>
             </CardBody>
           </Card>
         </Tab>
