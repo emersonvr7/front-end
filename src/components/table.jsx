@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, Button } from "@nextui-org/react";
 import { DeleteIcon } from "../assets/DeleteIcon";
 import { EditIcon } from "../assets/EditIcon";
 import { EyeIcon } from "../assets/EyeIcon";
@@ -43,6 +43,22 @@ export default function TableComponent() {
     getData();
   }, []);
 
+  const handleDelete = async (userid) =>{
+    try {
+      const response = await fetch (`http://localhost:1975/users/${userid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      if(response.ok) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  }
+
   const renderCell = (user, columnKey) => {
     const cellValue = user[columnKey];
 
@@ -74,7 +90,9 @@ export default function TableComponent() {
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <Button onClick={() => handleDelete(user._id)}>
                 <DeleteIcon />
+                </Button>
               </span>
             </Tooltip>
           </div>
